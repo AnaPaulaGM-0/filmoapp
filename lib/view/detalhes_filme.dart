@@ -57,19 +57,28 @@ class DetalhesFilmeView extends StatelessWidget {
               ),
               textAlign: TextAlign.justify,
             ),
+            SizedBox(height: 40),
 
-            SizedBox(height: 30),
+            // Botón centrado al final
+            Center(
+              child: ElevatedButton.icon(
+                onPressed: () => abrirTeaser(filme.teaser),
+                icon: Icon(Icons.play_arrow, color: Colors.white),
+                label: Text(
+                  'Ver Teaser',
+                  style: TextStyle(color: Colors.white),
+                ),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.red.shade800,
+                  padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+              ),
+            ),
           ],
         ),
-      ),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () => abrirTeaser(filme.teaser),
-        label: Text(
-          'Ver Teaser',
-          style: TextStyle(color: Colors.white),
-        ),
-        icon: Icon(Icons.play_arrow, color: Colors.white),
-        backgroundColor: Colors.red.shade800,
       ),
     );
   }
