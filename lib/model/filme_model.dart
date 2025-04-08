@@ -1,3 +1,4 @@
+// modelo de filme
 class Filme {
   final int id;
   final String titulo;
@@ -5,7 +6,7 @@ class Filme {
   final int ano;
   final String imagenes;
   final String teaser;
-  bool isHovered = false;  // Propiedad para detectar si el mouse está sobre el elemento
+  bool isHovered = false; // si el mouse está encima
 
   Filme({
     required this.id,

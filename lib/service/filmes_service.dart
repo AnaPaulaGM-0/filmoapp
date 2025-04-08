@@ -1,6 +1,8 @@
 import '../model/filme_model.dart';
 
+// lista de filmes
 class FilmesService {
+  // devuelve la lista con todos los filmes
   List<Filme> getFilmes() {
     return [
       Filme(

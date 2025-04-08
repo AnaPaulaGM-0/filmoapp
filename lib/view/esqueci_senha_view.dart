@@ -1,24 +1,25 @@
 import 'package:flutter/material.dart';
 
 class EsqueciSenhaView extends StatelessWidget {
-  final txtEmail = TextEditingController();
+  final txtEmail = TextEditingController(); // campo de e-mail
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Recuperação de Senha')),
+      appBar: AppBar(title: Text('Recuperação de Senha')), // título da appbar
       body: Padding(
-        padding: EdgeInsets.all(30),
+        padding: EdgeInsets.all(30), // espaço interno
         child: Column(
           children: [
             TextField(
-              controller: txtEmail,
-              decoration: InputDecoration(labelText: 'Digite seu e-mail'),
+              controller: txtEmail, // controla o texto do e-mail
+              decoration: InputDecoration(labelText: 'Digite seu e-mail'), // rótulo do campo
             ),
-            SizedBox(height: 20),
+            SizedBox(height: 20), // espaço entre os elementos
             ElevatedButton(
               onPressed: () {
                 if (txtEmail.text.isEmpty) {
+                  // se o campo estiver vazio, mostra aviso
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(content: Text('E-mail não pode ser vazio')),
                   );
@@ -29,7 +30,7 @@ class EsqueciSenhaView extends StatelessWidget {
                   );
                 }
               },
-              child: Text('Enviar Instruções'),
+              child: Text('Enviar Instruções'), // texto do botão
             ),
           ],
         ),
