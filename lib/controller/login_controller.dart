@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 
-// control del login
-class LoginController extends ChangeNotifier {
-  // cajas de texto
+class LoginController {
   final txtEmail = TextEditingController();
   final txtSenha = TextEditingController();
 
-  // valida si los campos están llenos
   bool validarLogin() {
-    if (txtEmail.text.isEmpty || txtSenha.text.isEmpty) {
-      return false;
-    }
-    return true;
+    return txtEmail.text.isNotEmpty && txtSenha.text.isNotEmpty;
+  }
+
+  void limparCampos() {
+    txtEmail.clear();
+    txtSenha.clear();
   }
 }

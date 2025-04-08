@@ -4,10 +4,12 @@ import '../controller/cadastro_controller.dart';
 
 // Vista de registro
 class CadastroView extends StatelessWidget {
-  final ctrl = GetIt.I.get<CadastroController>();
+  final ctrl = GetIt.I.get<CadastroController>(); // obtiene el controlador de cadastro
 
   @override
   Widget build(BuildContext context) {
+    ctrl.limparCampos(); // 🔄 limpia los campos al abrir la vista
+
     return Scaffold(
       backgroundColor: Colors.black, // fondo negro
       appBar: AppBar(
@@ -28,7 +30,7 @@ class CadastroView extends StatelessWidget {
               _campoTexto(ctrl.txtEmail, 'Email'), // campo de email
               _campoTexto(ctrl.txtTelefone, 'Telefone'), // campo de teléfono
               _campoTexto(ctrl.txtSenha, 'Senha', isSenha: true), // campo de contraseña
-              _campoTexto(ctrl.txtConfirmarSenha, 'Confirmar Senha', isSenha: true), // campo para confirmar contraseña
+              _campoTexto(ctrl.txtConfirmarSenha, 'Confirmar Senha', isSenha: true), // confirmar contraseña
               SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () {

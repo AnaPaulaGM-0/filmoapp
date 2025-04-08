@@ -7,6 +7,8 @@ class LoginView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ctrl.limparCampos(); // 🔄 limpia los campos cada vez que se abre la vista
+
     return Scaffold(
       backgroundColor: Colors.black, // fondo negro
       body: Center(
