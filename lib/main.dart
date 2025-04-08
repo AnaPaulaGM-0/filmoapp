@@ -1,10 +1,11 @@
 import 'package:device_preview/device_preview.dart';
-import 'package:filmo_app/controller/cadastro_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 
-import 'controller/filmes_controller.dart';
 import 'controller/login_controller.dart';
+import 'controller/filmes_controller.dart';
+import 'controller/cadastro_controller.dart';
+
 import 'view/login_view.dart';
 import 'view/cadastro_view.dart';
 import 'view/esqueci_senha_view.dart';
@@ -13,14 +14,18 @@ import 'view/filmes_view.dart';
 import 'view/detalhes_filme.dart';
 import 'view/sobre_view.dart';
 
-
 final g = GetIt.instance;
 
 void main() {
   g.registerSingleton<LoginController>(LoginController());
   g.registerSingleton<FilmesController>(FilmesController());
   g.registerSingleton<CadastroController>(CadastroController());
-  runApp(DevicePreview(builder: (builder) => const MainApp()));
+
+  runApp(
+    DevicePreview(
+      builder: (context) => const MainApp(),
+    ),
+  );
 }
 
 class MainApp extends StatelessWidget {
@@ -32,34 +37,48 @@ class MainApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'FilmoApp',
       theme: ThemeData(
-        primaryColor: Colors.red,
         scaffoldBackgroundColor: Colors.black,
+        primaryColor: Colors.red.shade800,
         appBarTheme: AppBarTheme(
-          backgroundColor: Colors.black,
-          titleTextStyle: TextStyle(color: Colors.white),
+          backgroundColor: Colors.red.shade800,
+          titleTextStyle: TextStyle(
+            color: Colors.white,
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+          ),
+          iconTheme: IconThemeData(color: Colors.white),
         ),
         textTheme: TextTheme(
-          bodyLarge: TextStyle(color: Colors.white),
-          bodyMedium: TextStyle(color: Colors.white),
+          bodyLarge: TextStyle(color: Colors.white, fontSize: 16),
+          bodyMedium: TextStyle(color: Colors.white, fontSize: 14),
         ),
         inputDecorationTheme: InputDecorationTheme(
-          labelStyle: TextStyle(color: Colors.red),
+          labelStyle: TextStyle(color: Colors.white),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
-            borderSide: BorderSide(color: Colors.red),
+            borderSide: BorderSide(color: Colors.red.shade800),
           ),
+          enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.red.shade800),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.red.shade800),
+          ),
+          filled: true,
+          fillColor: Colors.white10,
         ),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.red,
-            foregroundColor: Colors.black,
+            backgroundColor: Colors.red.shade800,
+            foregroundColor: Colors.white,
+            textStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10),
             ),
           ),
         ),
       ),
-      initialRoute: 'filmes',
+      initialRoute: 'login',
       routes: {
         'login': (context) => LoginView(),
         'cadastro': (context) => CadastroView(),

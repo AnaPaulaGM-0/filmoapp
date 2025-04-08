@@ -1,53 +1,87 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
-
 import '../model/filme_model.dart';
 
-class DetalhesFilmeView extends StatefulWidget {
-  const DetalhesFilmeView({super.key});
-
-  @override
-  State<DetalhesFilmeView> createState() => _DetalhesFilmeViewState();
-}
-
-class _DetalhesFilmeViewState extends State<DetalhesFilmeView> {
-Future<void>? _launched;
-
-  Future<void> _launchInBrowserView(Uri url) async {
-    if (!await launchUrl(url, mode: LaunchMode.inAppBrowserView)) {
-      throw Exception('Could not launch $url');
-    }
-  }
-
+class DetalhesFilmeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Filme filme = ModalRoute.of(context)!.settings.arguments as Filme;
 
     return Scaffold(
-      appBar: AppBar(title: Text(filme.titulo)),
-      body: Padding(
-        padding: EdgeInsets.all(20),
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              Text(
-                filme.descricao,
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-              ),
-              SizedBox(height: 10),
-              Image.asset('lib/imagenes/${filme.imagenes}'),
-              ElevatedButton(
-                  onPressed: () => setState(() {
-                    final Uri toLaunch =
-                      Uri(scheme: 'https', host: 'youtu.be', path: '${filme.teaser}/');
-                    _launched = _launchInBrowserView(toLaunch);
-                  }),
-                  child: const Text('Launch in app'),
-                ),
-            ],
-          ),
+      backgroundColor: Colors.black,
+      appBar: AppBar(
+        title: Text(
+          filme.titulo,
+          style: TextStyle(color: Colors.white),
+        ),
+        backgroundColor: Colors.red.shade800,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Colors.white),
+          onPressed: () => Navigator.pop(context),
         ),
       ),
+      body: SingleChildScrollView(
+        padding: EdgeInsets.all(20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            // Imagen del filme
+            ClipRRect(
+              borderRadius: BorderRadius.circular(12),
+              child: Image.asset(
+                'lib/imagenes/${filme.imagenes}',
+                fit: BoxFit.cover,
+              ),
+            ),
+            SizedBox(height: 20),
+
+            // Título "Sinopse"
+            Text(
+              'Sinopse',
+              style: TextStyle(
+                fontSize: 22,
+                fontWeight: FontWeight.bold,
+                color: Colors.red.shade800,
+              ),
+            ),
+            SizedBox(height: 10),
+
+            // Texto de la sinopse
+            Text(
+              filme.descricao.isNotEmpty
+                  ? filme.descricao
+                  : 'Sinopse ainda não disponível.',
+              style: TextStyle(
+                fontSize: 18,
+                color: Colors.white70,
+              ),
+              textAlign: TextAlign.justify,
+            ),
+
+            SizedBox(height: 30),
+          ],
+        ),
+      ),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () => abrirTeaser(filme.teaser),
+        label: Text(
+          'Ver Teaser',
+          style: TextStyle(color: Colors.white),
+        ),
+        icon: Icon(Icons.play_arrow, color: Colors.white),
+        backgroundColor: Colors.red.shade800,
+      ),
     );
+  }
+}
+
+void abrirTeaser(String videoId) async {
+  final String url = 'https://www.youtube.com/watch?v=${videoId.trim()}';
+  final Uri uri = Uri.parse(url);
+
+  if (await canLaunchUrl(uri)) {
+    await launchUrl(uri, mode: LaunchMode.externalApplication);
+  } else {
+    throw 'Não foi possível abrir o teaser';
   }
 }

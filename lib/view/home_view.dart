@@ -4,7 +4,11 @@ class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('FilmoApp')),
+      backgroundColor: Colors.black,
+      appBar: AppBar(
+        title: Text('FilmoApp'),
+        backgroundColor: Colors.red.shade800,
+      ),
       body: Padding(
         padding: EdgeInsets.all(30),
         child: Column(
@@ -12,20 +16,38 @@ class HomeView extends StatelessWidget {
           children: [
             Text(
               'Bem-vindo ao FilmoApp!',
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                fontSize: 26,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
+              textAlign: TextAlign.center,
+            ),
+            SizedBox(height: 30),
+            ElevatedButton.icon(
+              onPressed: () => Navigator.pushNamed(context, 'filmes'),
+              icon: Icon(Icons.movie),
+              label: Text(
+                'Ver Filmes',
+                style: TextStyle(fontSize: 18),
+              ),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.red.shade800,
+                minimumSize: Size(double.infinity, 50),
+              ),
             ),
             SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.pushNamed(context, 'filmes');
-              },
-              child: Text('Ver Filmes'),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.pushNamed(context, 'sobre');
-              },
-              child: Text('Sobre o Aplicativo'),
+            ElevatedButton.icon(
+              onPressed: () => Navigator.pushNamed(context, 'sobre'),
+              icon: Icon(Icons.info_outline),
+              label: Text(
+                'Sobre o Aplicativo',
+                style: TextStyle(fontSize: 18),
+              ),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.red.shade800,
+                minimumSize: Size(double.infinity, 50),
+              ),
             ),
           ],
         ),
